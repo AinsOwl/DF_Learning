@@ -1,5 +1,5 @@
 # BelkaGPT: Effective Artificial Intelligence in DFIR  
-## 🧠 Introduction: AI Technologies and LLM
+## 1️⃣ Introduction: AI Technologies and LLM
 
 ---
 
@@ -233,7 +233,7 @@ This process enables AI to generalize patterns and perform complex human-like ta
 
 ---
 
-## 🧩 Usage of AI in DFIR
+## 2️⃣ Usage of AI in DFIR
 
 ### 🔹 How AI Can Help in DFIR
 Traditional digital forensics tools automate **data acquisition, decryption, and extraction**, but the real challenge starts **after** extraction — when thousands of artifacts must be manually examined. AI adds immense value in analyzing **media files and textual content**, tasks that traditionally take hours of manual review.
@@ -278,7 +278,7 @@ By transforming **images, audio, and text** into **searchable digital signals**,
 
 ---
 
-## ⚙️ Implementation Challenges in DFIR
+## 3️⃣ Implementation Challenges in DFIR
 
 ### 🔸 Reliability
 AI operates only within the limits of its **training data**.  
@@ -310,7 +310,7 @@ This makes adoption challenging for smaller or resource-limited labs.
 
 ---
 
-## 🧭 Making AI Work for Digital Forensics
+## 4️⃣ Making AI Work for Digital Forensics
 
 To safely and effectively use AI in DFIR:
 
@@ -350,7 +350,7 @@ Unlike generic AI tools like ChatGPT, **BelkaGPT knows your case data** and **ne
 
 ---
 
-## 🚀 Getting Started with BelkaGPT and BelkaGPT Hub
+## 5️⃣ Getting Started with BelkaGPT and BelkaGPT Hub
 
 ---
 
@@ -476,6 +476,12 @@ To enable distributed AI processing via the Hub:
 | **How many processing nodes can I add?** | There is **no upper limit**. |
 | **How does the Hub manage multiple tasks?** | Tasks are queued **FIFO** (first-in, first-out). The Hub can distribute jobs across workers for concurrent task handling. |
 
+**Notes**
+- No limit on processing nodes.  
+- Up to 8 GPUs per node (Belkasoft X v2.9+).  
+- FIFO task queuing for concurrent jobs.  
+- Data processing only (inference offloading planned).
+
 ### ⚡ Current Capabilities and Limitations
 
 | Feature | Status |
@@ -487,4 +493,134 @@ To enable distributed AI processing via the Hub:
 | **Supports local network deployment** | ✅ Yes, for secure on-premise setups |
 
 ---
+## 6️⃣ Reviewing Artifacts in Belkasoft X
 
+### 🔹 Artifacts Window Overview
+Artifacts = extracted forensic data (chats, images, documents, etc.).
+
+**Layout**
+- **Left:** Structure & Overview tabs  
+- **Middle:** Artifact list  
+- **Right:** Properties pane  
+- **Bottom:** Tools pane  
+- **Top:** Report, mini-timeline, global filter
+
+### 🧭 Structure vs Overview
+- **Structure Tab:** Shows data sources and artifact origins.  
+- **Overview Tab:** Groups all artifacts of one type together for easy review.
+
+### 💬 Artifact List Views
+- **Bubble View:** Chat-style, user-friendly.  
+- **Table View:** Sortable, filterable columns for technical analysis.  
+- Right-click → *Show contacts* for per-user chat breakdown.
+
+**Tools Pane:** Displays viewers like Hex, SQLite, Registry, or Plist depending on artifact type.
+
+**Properties Pane:** Shows metadata for selected items.
+
+### 🕒 Top Controls
+- **Report:** Export checked items.  
+- **Mini-timeline:** Filter artifacts by date range.  
+- **Global filter icon:** Apply filters across views (orange when active).
+
+## 7️⃣ Filtering Data in Belkasoft X
+**Purpose:** Narrow down artifacts efficiently in large datasets.
+Filtering works in:
+- Artifacts window  
+- Connection Graph  
+- Timeline (largest dataset)
+
+### ⚙️ Creating Filters
+1. Click **funnel icon** in column header.  
+2. Configure criteria (From, Message, Time, etc.).  
+3. Click **Apply** → filtered list appears.
+**Editing:** Reopen funnel icon to modify.  
+**Clearing:** Use *Clear* or *Reset to default*.
+
+
+### ➕ Multiple Criteria
+Combine filters (e.g., “From” + “Message”).  
+Applied filters appear highlighted in **blue**.
+Use **Find** box to search large lists (e.g., contacts).  
+Option *Add checked items to filter* combines multiple searches.
+
+
+**🧩 Generated Filters:** Some criteria (like *Analysis result*) appear only after Belkasoft X performs AI-based analysis — e.g., detecting faces, text, or guns in images.
+
+### 🖼️ Gallery and Global Filters
+- In Gallery View → right-click to add/modify filters.  
+- Global filter (blue funnel icon) applies across all lists.  
+- Filters by text, date, profile, data source, or bookmark.  
+- Icon turns yellow when active.
+
+---
+## 8️⃣ Searching Artifacts in Belkasoft X 🔍
+
+### 🔹 Purpose of Searching
+After artifact extraction, you may need to **search through text-based data** to locate specific evidence. Search works alongside filters to quickly narrow down the review set.
+Belkasoft X automatically **indexes all text-based artifact properties** — text content, metadata, timestamps, etc. This makes searches extremely fast, even on large cases.
+
+> ⚠️ **Note:** Don’t confuse profile search (performed during data source analysis) with artifact search (performed after extraction).  
+> Example: Belkasoft X extracts an Outlook mailbox and documents first — *then* you can search inside their extracted text.
+
+### 🧭 How to Run a Search
+You can start a search in two ways:
+- Press **Ctrl + F**, or  
+- Go to **Dashboard → Actions → Search artifacts**
+This opens the **Search window**, where you can define your search parameters.
+
+### ⚙️ Search Options
+
+#### 1. **Word or Phrase**
+- Finds all artifacts containing a specific word or phrase.  
+- **Not case-sensitive**.  
+- Searches for **whole-word matches**.  
+- Use `*` for partial matches.  
+- Optionally enable **Treat as regex** for **regular expression** searches.
+🧩 *Example:*  
+- `win*` → matches *win*, *wine*, *window*  
+- `*in*` → matches *skin*, *within*, *Instagram*
+**Use regex when:** You don’t know the exact term (e.g., searching for unknown credit card patterns, email formats, etc.).
+
+#### 2. **Words from File**
+- Use when you have a **keyword list** (e.g., names, terms, codenames).  
+- Belkasoft searches all listed words in one operation.  
+- Can also treat entries as regex patterns.
+🗂️ Ideal for batch keyword searches — saves time in large investigations.
+
+#### 3. **Predefined Searches**
+Belkasoft includes built-in search lists, such as:
+- Adult or suspicious site names  
+- City names  
+- Disposable (one-time) email domains  
+- Steganography or encryption app names  
+📁 Path to predefined lists: `C:\Program Files\Belkasoft Evidence Center X\App\Resources\Search\Names\`
+These text files are **customizable** — investigators can add or edit terms as needed.
+
+### 🧱 Search Scope Options
+At the bottom of the Search window, two dropdowns define **where** to search:
+1. **Select a data source:** Choose one or multiple data sources to include.
+2. **Select types to search in:** Limit the search to certain artifact types (e.g., Documents, Chats, Downloads).
+Each list includes **root checkboxes** for easy bulk selection.
+💡 **Tip:** It’s more efficient to search all sources first, then use filters within the *Search Results* window to narrow down.
+
+### 🚀 Executing the Search
+Click **OK** to begin. The search appears as a background process in the **Tasks window**.
+Because all artifacts are indexed, searches are near-instantaneous, even with massive data volumes.
+
+### 🧩 Special Search Operators
+| Operator | Function | Example | Matches |
+|-----------|-----------|----------|----------|
+| `*` | Wildcard for zero or more characters | `win*` | win, wine, window |
+| `?` | Wildcard for a single character | `?hat` | what, that |
+| `~` | Fuzzy search (max two edits) | `what~` | what, that, hat, wat |
+
+**Indexing:**  
+All extracted artifacts (words, metadata, timestamps, etc.) are indexed for high-speed searching.  
+These indexes form a **Key dictionary**, accessible from the **Dashboard → Actions** menu.
+
+### 🧠 Related Tools
+- **Regular Expression Syntax:** Advanced pattern-based search for emails, IDs, or credit cards.  
+- **Search Results Window:** Displays all matching artifacts, allowing further filtering, tagging, and reporting.
+
+---
