@@ -220,6 +220,7 @@ You can automate BelkaGPT workflows through the **Belkasoft X Command-Line Inter
 1. Go to the installation directory → `App` subfolder  
 2. Run:  
 3. In the **BelkaGPT options** section, configure:
+
 | Option | Function |
 |---------|-----------|
 | **Enable BelkaGPT** | Launches data preprocessing for Q&A |
